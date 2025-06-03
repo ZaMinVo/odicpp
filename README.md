@@ -39,7 +39,11 @@ trtexec --onnx=model/yolo11n.onnx --saveEngine=model/yolo11n_fp16.engine --fp16
 
 sudo apt install nvidia-cuda-toolkit
 
+compile testcv: g++ -Wall -o testcv src/testcv.cpp `pkg-config --cflags --libs opencv4`
 
-
-
-compile: g++ -Wall -o testcv src/testcv.cpp `pkg-config --cflags --libs opencv4`
+# Build and Run 
+cd odicpp
+mkdir build && cd build
+cmake ..
+make
+./infer
