@@ -20,7 +20,12 @@ pip install ultralytics
 pip install onnxruntime
 
 # Cài đặt torch và onnx
-pip install torch onnx
+pip install onnx
+# Cuda > 12
+pip install torch 
+# Cuda 11.8
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
 
 # Cài đặt g++
 sudo apt install -y g++
@@ -30,5 +35,11 @@ pip install tensorrt
 
 # Chuyển đổi ONNX sang TensorRT
 trtexec --onnx=model/yolo11n.onnx --saveEngine=model/yolo11n_fp16.engine --fp16
+# If trtexec is not found
+
+sudo apt install nvidia-cuda-toolkit
+
+
+
 
 compile: g++ -Wall -o testcv src/testcv.cpp `pkg-config --cflags --libs opencv4`
