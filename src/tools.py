@@ -24,6 +24,11 @@ def convert_to_onnx(model_path = "model/yolo11n.pt", output_path = "model/yolo11
     if default_onnx != output_path and os.path.exists(default_onnx):
         os.rename(default_onnx, output_path)
 
+def convert_to_RT(model_path = "model/yolo11n.pt"):
+    model = YOLO(model_path)
+    model.export(format="engine", half=True)
+    
+
 def test_onnx(onnx_path="model/yolo11n.onnx", img_size=(640, 640)):
     session = ort.InferenceSession(onnx_path)
     inputs = session.get_inputs()
