@@ -1,15 +1,10 @@
-#ifndef FUNC_HPP
-#define FUNC_HPP
-
-#include <opencv2/opencv.hpp>
-#include <iostream>
-
-#include <NvInfer.h>
-#include <opencv2/opencv.hpp>
-#include <fstream>
+#pragma once
 #include <vector>
-#include <chrono>
+#include <string>
+#include <opencv2/opencv.hpp>
 
-void saveDetections(const std::string& filename, const std::vector<std::vector<float>>& detections);
+// Load ảnh và resize
+cv::Mat loadAndPreprocess(const std::string& imagePath, std::vector<float>& inputTensor);
 
-#endif
+// Vẽ bounding boxes
+void drawBoxes(cv::Mat& image, const std::vector<std::vector<float>>& boxes);

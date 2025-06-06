@@ -26,24 +26,12 @@ pip install torch
 # Cuda 11.8
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
-
 # Cài đặt g++
 sudo apt install -y g++
 
-# Cài đặt TensorRT
-pip install tensorrt
 
-# Chuyển đổi ONNX sang TensorRT
-trtexec --onnx=model/yolo11n.onnx --saveEngine=model/yolo11n_fp16.engine --fp16
-# If trtexec is not found
+wget https://github.com/microsoft/onnxruntime/releases/download/v1.18.0/onnxruntime-linux-x64-1.18.0.tgz
+tar -xzf onnxruntime-linux-x64-1.18.0.tgz
 
-sudo apt install nvidia-cuda-toolkit
+<!-- wget https://raw.githubusercontent.com/nlohmann/json/develop/single_include/nlohmann/json.hpp -P src/ -->
 
-compile testcv: g++ -Wall -o testcv src/testcv.cpp `pkg-config --cflags --libs opencv4`
-
-# Build and Run 
-cd odicpp
-mkdir build && cd build
-cmake ..
-make
-./infer

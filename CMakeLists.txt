@@ -1,21 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
-project(YOLO_TRT_Live)
+project(YOLO_ONNX_CPP)
 
+set(CMAKE_CXX_STANDARD 14)
+
+# ONNX Runtime paths
+include_directories(/home/jet/onnxruntime-linux-x64-1.18.0/include)
+link_directories(/home/jet/onnxruntime-linux-x64-1.18.0/lib)
+
+# OpenCV
 find_package(OpenCV REQUIRED)
-find_package(CUDA REQUIRED)
 
-include_directories(
-    /usr/include
-    /usr/local/cuda/include
-    /usr/include/x86_64-linux-gnu
-    ${OpenCV_INCLUDE_DIRS}
-)
+# Build binary
+add_executable(yolo src/func.cpp src/infer.cpp)
 
-link_directories(
-    /usr/lib/x86_64-linux-gnu
-    /usr/local/cuda/lib64
-)
-
-add_executable(infer src/infer.cpp)
-
-target_link_libraries(infer nvinfer cudart ${OpenCV_LIBS})
+# Link libraries
+target_link_libraries(yolo ${OpenCV_LIBS} onnxruntime)
